@@ -47,3 +47,13 @@ jobs:
     steps:
         - name: View SW Version
           run:  sw_vers
+
+  dependant-job:
+    runs-on: Windows-latest
+    needs: build
+    steps:
+      - name: echo a string
+        run:  Write-Output "Windows string"
+
+      - name: Error Step
+        run:  doesn't exist
