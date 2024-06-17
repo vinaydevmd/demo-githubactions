@@ -41,3 +41,9 @@ jobs:
 
       - name: Log the secret
         run: echo ${{secrets.TEST_SEC}}
+
+  parallel-job-macos:
+    runs-on: macos-latest
+    steps:
+        - name: View SW Version
+          run:  sw_vers
