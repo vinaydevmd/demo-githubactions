@@ -56,4 +56,4 @@ jobs:
         run:  Write-Output "Windows string"
 
       - name: Error Step
-        run:  doesn't exists test2
+        run:  doesn't exists test2-skip
