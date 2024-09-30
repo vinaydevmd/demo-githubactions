@@ -6,15 +6,19 @@ jobs:
   checkout-and-display-files:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        id: gitcheckout
-        run: |
-           git init
-           git fetch origin
-           git checkout remote_branch
-        env:
+      # - name: Checkout
+      #   id: gitcheckout
+      #   run: |
+      #      git init
+      #      git config --global init.defaultBranch
+      #      git checkout remote_branch
+      #   env:
+      #     GH_TOKEN: ${{ github.token }}
+      - uses : action\checkout@v4
+        with :
+          fetch-depth: 0
           GH_TOKEN: ${{ github.token }}
-      
+
       - name: repodescription
         shell: bash
         run: |
