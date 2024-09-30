@@ -9,6 +9,7 @@ jobs:
       - name: Checkout
         id: gitcheckout
         run: |
+           git init
            git fetch origin
            git checkout remote_branch
         env:
@@ -17,6 +18,7 @@ jobs:
       - name: repodescription
         shell: bash
         run: |
+          git init
           git fetch origin
           git checkout remote_branch
           gh repo view --json description | tee -a log.txt
