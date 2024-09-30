@@ -14,17 +14,16 @@ jobs:
       #      git checkout remote_branch
       #   env:
       #     GH_TOKEN: ${{ github.token }}
-      - uses : action\checkout@v4
+      - uses : actions/checkout@v4
         with :
           fetch-depth: 0
           
-
       - name: repodescription
         shell: bash
         run: |
           gh repo view --json description | tee -a log.txt
           echo "repo-description=$(cat log.txt)" 
-          #echo "description : ${{steps.gitcheckout.outputs.repo-description}}"
+          # echo "description : ${{steps.gitcheckout.outputs.repo-description}}"
           # grep -vn "^[a-zA-Z0-9 ]*$" ${{steps.gitcheckout.outputs.repo-description}} | tee -a finallog.txt
         env:
           GH_TOKEN: ${{ github.token }}
