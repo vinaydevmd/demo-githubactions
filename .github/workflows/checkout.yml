@@ -9,8 +9,7 @@ jobs:
       - name: Checkout
         id: gitcheckout
         run: |
-          git init
-          git checkout -b main
+          git config --global init.defaultBranch
           gh repo view --json description | tee -a log.txt
           echo "repo-description=$(cat log.txt)" >> $GITHUB_OUTPUT
         env:
