@@ -6,13 +6,13 @@ jobs:
   checkout-and-display-files:
     runs-on: ubuntu-latest
     steps:
-      # - name: Checkout
-      #   id: gitcheckout
-      #   run: |
-      #     gh repo view --json description | tee -a log.txt
-      #     echo "repo-description=$(cat log.txt)" >> $GITHUB_OUTPUT
-      #   env:
-      #     GH_TOKEN: ${{ github.token }}
+      - name: Checkout
+        id: gitcheckout
+        run: |
+           git init
+           git checkout -b main
+        env:
+          GH_TOKEN: ${{ github.token }}
       
       - name: repodescription
         shell: bash
