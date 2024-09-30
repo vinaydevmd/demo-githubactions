@@ -22,8 +22,10 @@ jobs:
         shell: bash
         run: |
           gh repo view --json description | tee -a log.txt
+          awk -v FS="("description":|"}")" '{print $2}'
           grep -vn "^[a-zA-Z0-9 ]*$" log.txt | tee -a finallog.txt
           echo "repo-description=$(cat finallog.txt)" 
+
 
         env:
           GH_TOKEN: ${{ github.token }}
