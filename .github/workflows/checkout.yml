@@ -6,16 +6,18 @@ jobs:
   checkout-and-display-files:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        id: gitcheckout
-        run: |
-          gh repo view --json description | tee -a log.txt
-          echo "repo-description=$(cat log.txt)" >> $GITHUB_OUTPUT
-        env:
-          GH_TOKEN: ${{ github.token }}
+      # - name: Checkout
+      #   id: gitcheckout
+      #   run: |
+      #     gh repo view --json description | tee -a log.txt
+      #     echo "repo-description=$(cat log.txt)" >> $GITHUB_OUTPUT
+      #   env:
+      #     GH_TOKEN: ${{ github.token }}
       
-      - name: updaterepo
+      - name: repodescription
         shell: bash
         run: |
-            echo "description : ${{steps.gitcheckout.outputs.repo-description}}"
-           # grep -vn "^[a-zA-Z0-9 ]*$" ${{steps.gitcheckout.outputs.repo-description}} | tee -a finallog.txt
+          gh repo view --json description | tee -a log.txt
+          echo "repo-description=$(cat log.txt)" 
+          #echo "description : ${{steps.gitcheckout.outputs.repo-description}}"
+          # grep -vn "^[a-zA-Z0-9 ]*$" ${{steps.gitcheckout.outputs.repo-description}} | tee -a finallog.txt
