@@ -22,7 +22,6 @@ jobs:
         shell: bash
         run: |
           gh repo view --json description | tee -a log.txt
-          $ echo 'Here is a string, and Here is another string.' | grep -oP '(?<=Here).*?(?=string)'
           grep -oP '(?<=:).*?(?=})' log.txt | finallog.txt
           echo "repo-description=$(cat finallog.txt)" 
         env:
