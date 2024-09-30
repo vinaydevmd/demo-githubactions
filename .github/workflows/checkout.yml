@@ -7,12 +7,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
+        id: gitcheckout
         run: |
           git init
           git checkout main
           gh repo edit -d "testing repo description"
+          gh repo view --json description | tee -a log.txt
+          echo "repo-description=$(log.txt)" >> $GITHUB_OUTPUT
         env:
           GH_TOKEN: ${{ github.token }}
-
-      - name: List Files After
-        run: ls -a
+      
+      - name: updaterepo
+        shell: bash
+        run:
+            |
+            echo "description : ${{steps.gitcheckout.outputs.repo-description}}"
+            grep -vn "^[a-zA-Z0-9 ]*$" ${{steps.gitcheckout.outputs.repo-description}} | tee -a finallog.txt
