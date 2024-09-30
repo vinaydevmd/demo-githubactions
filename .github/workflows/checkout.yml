@@ -9,14 +9,16 @@ jobs:
       - name: Checkout
         id: gitcheckout
         run: |
-           git init
-           git checkout -b main
+           git fetch origin
+           git checkout remote_branch
         env:
           GH_TOKEN: ${{ github.token }}
       
       - name: repodescription
         shell: bash
         run: |
+          git fetch origin
+          git checkout remote_branch
           gh repo view --json description | tee -a log.txt
           echo "repo-description=$(cat log.txt)" 
           #echo "description : ${{steps.gitcheckout.outputs.repo-description}}"
