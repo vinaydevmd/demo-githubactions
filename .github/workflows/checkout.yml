@@ -22,8 +22,8 @@ jobs:
         shell: bash
         run: |
           gh repo view --json description | tee -a log.txt
-          awk -v FS="(:|})" log.txt | tee -a finallog.txt
+          $ echo 'Here is a string, and Here is another string.' | grep -oP '(?<=Here).*?(?=string)' # Non-greedy match (Notice the '?' after '*' in .*)
+          grep -oP '(?<=:).*?(?=})' # Non-greedy match (Notice the '?' after '*' in .*) | finallog.txt
           echo "repo-description=$(cat finallog.txt)" 
-
         env:
           GH_TOKEN: ${{ github.token }}
