@@ -22,9 +22,6 @@ jobs:
       - name: repodescription
         shell: bash
         run: |
-          git init
-          git fetch origin
-          git checkout remote_branch
           gh repo view --json description | tee -a log.txt
           echo "repo-description=$(cat log.txt)" 
           #echo "description : ${{steps.gitcheckout.outputs.repo-description}}"
