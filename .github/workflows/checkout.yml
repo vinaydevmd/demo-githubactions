@@ -10,8 +10,7 @@ jobs:
         id: gitcheckout
         run: |
           git init
-          git checkout main
-          gh repo edit -d "testing repo description"
+          git checkout -b main
           gh repo view --json description | tee -a log.txt
           echo "repo-description=$(log.txt)" >> $GITHUB_OUTPUT
         env:
