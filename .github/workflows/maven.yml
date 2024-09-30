@@ -1,0 +1,36 @@
+name: Maven Build
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
+
+        - name: Set up JDK
+          uses: actions/setup-java@v2
+          with:
+              java-version: '11'
+
+        - name: Build with Maven
+          run: mvn clean install
+
+        - name: Publish Jar as Artifact
+          uses: actions/upload-artifact@v2
+          with:
+            name: jar
+            path: target/*.jar
+        - name: Run Xray Scan
+            run: xray scan target/*.jar
+
+        - name: Publish Xray Report
+            uses: actions/upload-artifact@v2
+            with:
+                name: xray-report
+                path: xray-report.json
