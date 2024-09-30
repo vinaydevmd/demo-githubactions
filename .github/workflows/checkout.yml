@@ -22,5 +22,8 @@ jobs:
           git fetch origin
           git checkout main
           gh repo edit -d "testing repo description"
+        env:
+          GH_TOKEN: ${{ github.token }}
+
       - name: List Files After
         run: ls -a
