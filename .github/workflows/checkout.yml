@@ -18,7 +18,6 @@ jobs:
       
       - name: updaterepo
         shell: bash
-        run:
-            |
+        run: |
             echo "description : ${{steps.gitcheckout.outputs.repo-description}}"
-            grep -vn "^[a-zA-Z0-9 ]*$" ${{steps.gitcheckout.outputs.repo-description}} | tee -a finallog.txt
+           # grep -vn "^[a-zA-Z0-9 ]*$" ${{steps.gitcheckout.outputs.repo-description}} | tee -a finallog.txt
