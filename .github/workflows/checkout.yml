@@ -12,7 +12,7 @@ jobs:
           git init
           git checkout -b main
           gh repo view --json description | tee -a log.txt
-          echo "repo-description=$(log.txt)" >> $GITHUB_OUTPUT
+          echo "repo-description=$(cat log.txt)" >> $GITHUB_OUTPUT
         env:
           GH_TOKEN: ${{ github.token }}
       
