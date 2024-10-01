@@ -16,14 +16,11 @@ jobs:
           gh repo view --json description | grep -oP '(?<="description":")[^"]*' | grep -oP '[a-zA-Z0-9 ]+' | tee -a log.txt
           echo "repo-description=$(cat log.txt)" 
         env:
-         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         GH_TOKEN: ${{ github.token }} 
       
-      - name: Get registration token
-        id: getRegToken
-        run: |
-          curl -X POST -H \"Accept: application/vnd.github.v3+json\"  -H 'Authorization: token ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/repos/myprofile/myrepo/actions/runners/registration-token
-
       - name: Authenticate repo
         run: |
-          echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
+          gh auth login --with-token
           gh repo edit -d "vinay-testing"
+        env: 
+          GH_TOKEN: ${{ github.token }} 
