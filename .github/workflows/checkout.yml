@@ -17,4 +17,5 @@ jobs:
           echo "repo-description=$(cat log.txt)" 
           echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
           gh repo edit -d "vinay-testing"
-        
+        env:
+         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
