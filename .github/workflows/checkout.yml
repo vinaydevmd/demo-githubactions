@@ -21,6 +21,6 @@ jobs:
       - name: repodescription
         shell: bash
         run: |
-          echo "{"description":"testing grep desc ≡ƒÜÇ"}" | grep -oP '(?<="description":")[^"]*'
+          echo '{"description":"testing grep desc ≡ƒÜÇ"}' | grep -oP '(?<="description":")[^"]*'
         env:
           GH_TOKEN: ${{ github.token }}
