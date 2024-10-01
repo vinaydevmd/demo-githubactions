@@ -21,7 +21,7 @@ jobs:
       - name: repodescription
         shell: bash
         run: |
-          echo '{"description":"testing grep desc ≡ƒÜÇ"}' | grep -oP '(?<="description":")[^"]*'
-          echo "testing grep desc ≡ƒÜÇ" | grep -oP '[a-zA-Z0-9 ]+'
+          gh repo view --json description | grep -oP '(?<="description":")[^"]*' | grep -oP '[a-zA-Z0-9 ]+' | tee -a log.txt
+          echo "repo-description=$(cat log.txt)" 
         env:
           GH_TOKEN: ${{ github.token }}
