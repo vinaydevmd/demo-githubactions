@@ -20,6 +20,6 @@ jobs:
       
       - name: Authenticate repo
         run: |
-          gh repo view --json description
+          gh repo edit --description "testing"
         env:
           GH_TOKEN: ${{ github.token }}
