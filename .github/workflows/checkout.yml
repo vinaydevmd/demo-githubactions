@@ -20,7 +20,7 @@ jobs:
       
       - name: Authenticate repo
         run: |
-          gh auth login --with-token
-          gh repo edit -d "vinay-testing"
-        env: 
-          GH_TOKEN: ${{ github.token }} 
+          gh issue --repo ${{ github.repository }} \
+            create --title "Issue title" --body "Issue body"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
