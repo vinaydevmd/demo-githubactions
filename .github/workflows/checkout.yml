@@ -17,4 +17,4 @@ jobs:
           echo "repo-description=$(cat log.txt)" 
           gh repo edit --description "testing"
         env:
-         GH_TOKEN: ${{ github.token }} 
+         GH_TOKEN: ${{secrets.GITHUB_TOKEN}} 
