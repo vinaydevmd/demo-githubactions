@@ -9,7 +9,7 @@ jobs:
       actions: write
       contents: write
       deployments: write
-      
+
     steps:
       - uses : actions/checkout@v4
         with :
@@ -33,4 +33,4 @@ jobs:
                   description: "This is vinay testing description"
                   });
         env:
-         github-token:  ${{ secrets.GITHUB_TOKEN }}
+         github-token:  ${{ secrets.PAT_TOKEN }}
