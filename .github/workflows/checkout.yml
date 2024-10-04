@@ -15,6 +15,15 @@ jobs:
         run: |
           gh repo view --json description | grep -oP '(?<="description":")[^"]*' | grep -oP '[a-zA-Z0-9 ]+' | tee -a log.txt
           echo "repo-description=$(cat log.txt)" 
-          gh repo edit --description "testing"
         env:
          GH_TOKEN: ${{secrets.GITHUB_TOKEN}} 
+
+      - name: Updaet repo Description
+        uses: actions/github-script@v7
+        with:
+          script: |
+             await github.repo.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  description: "This is vinay testing description"
+                  });
