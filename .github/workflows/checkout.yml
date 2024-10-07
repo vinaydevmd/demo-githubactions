@@ -24,7 +24,7 @@ jobs:
         shell: bash
         run: |
           gh repo view --json description | grep -oP '(?<="description":")[^"]*' | grep -oP '[a-zA-Z0-9 ]+' | tee -a log.txt
-          echo "repo-description=$(cat log.txt)" >> $(GITHUB_OUTPUT)
+          echo "repo-description=$(cat log.txt)"
           gh repo edit -d "testing vinay desc"
         env:
          GH_TOKEN: ${{secrets.GITHUB_TOKEN}} 
