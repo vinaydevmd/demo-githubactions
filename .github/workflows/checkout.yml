@@ -20,25 +20,27 @@ jobs:
         with:
           gh-cli-version: 2.32.0 # optional, see action.yml for current default
 
+      # - name: repodescription
+      #   shell: bash
+      #   run: |
+      #     gh repo view --json description | grep -oP '(?<="description":")[^"]*' | grep -oP '[a-zA-Z0-9 ]+' | tee -a log.txt
+      #     echo "repo-description=$(cat log.txt)"
+      #     gh repo edit -d "testing vinay desc"
+      #   env:
+      #    GH_TOKEN: ${{secrets.GITHUB_TOKEN}} 
+
+      - name: Get repo Description
+        id: getrepo
+        uses: actions/github-script@v7
+        with:
+          script: |
+             description=$(gh repo view --json description | jq -r '.description | gsub("[^a-zA-Z0-9]";"")')
+             echo "description=$description"
+             echo "description=$description" >> $GITHUB_OUTPUT
+        env:
+         github-token: ${{secrets.GITHUB_TOKEN}}
+
       - name: repodescription
         shell: bash
         run: |
-          gh repo view --json description | grep -oP '(?<="description":")[^"]*' | grep -oP '[a-zA-Z0-9 ]+' | tee -a log.txt
-          echo "repo-description=$(cat log.txt)"
-          gh repo edit -d "testing vinay desc"
-        env:
-         GH_TOKEN: ${{secrets.GITHUB_TOKEN}} 
-
-      
-
-      # - name: Updaet repo Description
-      #   uses: actions/github-script@v7
-      #   with:
-      #     script: |
-      #        await github.rest.repos.update({
-      #             owner: context.repo.owner,
-      #             repo: context.repo.repo,
-      #             description: "This is vinay testing description"
-      #             });
-      #   env:
-      #    github-token: ${{secrets.GITHUB_TOKEN}}
+          echo "desc = ${{steps.getrepo.outputs.description }}"
