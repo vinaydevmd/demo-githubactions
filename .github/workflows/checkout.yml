@@ -34,7 +34,10 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-             description=$(gh repo view --json description | jq '.description')
+             const {execSync} = require('child_process');
+             const description= execSync('gh repo view --json description | jq -r \'.description').toString().trim();
+             console.log(`::set-output name=repo-description::${description}`);
+
             #  echo "description=$description"
             #  echo "description=$description" >> $GITHUB_OUTPUT
         env:
